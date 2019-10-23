@@ -10,6 +10,20 @@
 		A899DA83235DC978009413F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A899DA82235DC978009413F1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		A899DA89235DC980009413F1 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.intel.compilers.icc.latest;
+			fileType = sourcecode.cpp;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		A899DA7D235DC978009413F1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -74,6 +88,7 @@
 				A899DA7D235DC978009413F1 /* CopyFiles */,
 			);
 			buildRules = (
+				A899DA89235DC980009413F1 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -239,6 +254,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_VERSION = com.intel.compilers.icc.latest;
+				HEADER_SEARCH_PATHS = "";
+				ICC_CXX_LANG_DIALECT = "c++17";
+				ICC_LANG_OPENMP = parallel;
+				ICC_OPTLEVEL = speedHLO;
+				ICC_OPT_PARALLEL = NO;
+				ICC_OPT_REQUIRE_INTEL_ARCH = kabylake;
+				ICC_OPT_USE_INTEL_ARCH = kabylake;
+				ICC_TUNE_FOR_INTEL_ARCH = kabylake;
+				ICC_USE_OPTIMIZED_HEADERS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,6 +272,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_VERSION = com.intel.compilers.icc.latest;
+				HEADER_SEARCH_PATHS = "";
+				ICC_CXX_LANG_DIALECT = "c++17";
+				ICC_LANG_OPENMP = parallel;
+				ICC_OPTLEVEL = speedHLO;
+				ICC_OPT_PARALLEL = NO;
+				ICC_OPT_REQUIRE_INTEL_ARCH = kabylake;
+				ICC_OPT_USE_INTEL_ARCH = kabylake;
+				ICC_TUNE_FOR_INTEL_ARCH = kabylake;
+				ICC_USE_OPTIMIZED_HEADERS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
