@@ -17,7 +17,14 @@
 
 __global__ void compute_r(int *mem, double *rand_real, double *rand_imag ) {
     
-    for (int i=0; i<(int(NLIM)-1); i++) {
+    // We execute (total_blocks * blockDim * n_threads) parallel threads per iteration
+    // Execute (total_blocks * blockDim) parallel processes per iteration
+    int index = threadIdx.x + blockIdx.x * blockDim.x;
+    int total_blocks= gridDim.x;
+    // Stride must be total_blocks * blockDim
+    int stride= blockDim.x * total_blocks;
+
+    for (int i=index; i<(int(NLIM)-1); i+=stride) {
         
         if ((sqrt(rand_real[i]*rand_real[i] + rand_imag[i]*rand_imag[i])) <= 1.0f) {
             mem[i] = 1;
@@ -43,12 +50,14 @@ int main(int argc, const char * argv[]) {
     cudaMallocManaged(&rand_imag,int(NLIM)*sizeof(double));
     
  
-    for (int i=0; i<(int(NLIM)-1); i++) {
+    for (int i=0; i<(int(NLIM )-1); i++) {
         rand_real[i] = double(rand()) / double(RAND_MAX);
         rand_imag[i] = double(rand()) / double(RAND_MAX);
     }
 
-    compute_r <<<1, 1>>> (gpu_inner, rand_real, rand_imag);
+    int block_size = 256;
+    int n_blocks = (int(NLIM) + block_size - 1) / block_size;   //Ensure (n_blocks * block_size) > NLIM
+    compute_r <<<n_blocks, block_size>>> (gpu_inner, rand_real, rand_imag);
 // compute_r (gpu_inner,rand_real,rand_imag);
     
     cudaDeviceSynchronize();
